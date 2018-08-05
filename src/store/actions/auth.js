@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
+import { FIREBASE_API_KEY } from '../../Keys';
 
 export const authStart = () => {
     return {
@@ -48,10 +49,10 @@ export const auth = (email, password, isSignup) => {
             password: password,
             returnSecureToken: true
         };
-        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCQCrJ2rDQlky0Xcxsx3V9-OjrXYjZFwxo';
+        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' + FIREBASE_API_KEY;
 
         if (!isSignup) {
-            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCQCrJ2rDQlky0Xcxsx3V9-OjrXYjZFwxo';
+            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' + FIREBASE_API_KEY;
         }
         axios.post(url, authData)
             .then(response => {
